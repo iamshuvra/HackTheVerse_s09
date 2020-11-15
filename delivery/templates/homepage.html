@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="header mt-5 ">
+        <button type="button" class="btn btn-primary cart_all_product"  data-toggle="modal" data-target="#exampleModal">Cart <span class="badge badge-secondary cart_counter"></span></button>
+        <button type="button" class="btn btn-success ordered_product_btn">Ordered Products</button>
+        <button type="button" class="btn btn-success">Delivery Packages</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Order</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group list-group-flush cart_product_list_view">
+                </ul>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary order_next_btn">Next</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="delivery_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delivery</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Bikash Number</label>
+                      <input type="email" class="form-control" id="exampleInputNumber" aria-describedby="emailHelp" placeholder="Enter Bikash Phone Number">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Delivery Date</label>
+                      <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                      <small id="emailHelp" class="form-text text-muted">When do you want to take your product.</small>
+                    </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary order_submit_btn">Submit</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="products mt-5 d-flex justify-content-between flex-wrap">
+        {% with 'product-1 product-2 product-3 product-4 product-5 product-6' as list %}
+        {% for obj in list.split %}
+            {% include "product.html" with data=obj id=forloop.counter %}
+        {% endfor %}
+        {% endwith %}
+    </div>
+</div>
+{% endblock %}
